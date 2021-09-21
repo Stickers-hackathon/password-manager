@@ -3,6 +3,7 @@ import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:mezamashi_denwa/state/alarm_list.dart';
 import 'package:mezamashi_denwa/storage/alarm_list.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 
 void main() => runApp(MyApp());
 
@@ -73,12 +74,13 @@ class _ChangeFormState extends StatelessWidget {
         subtitle: Text(alarm.name),
       trailing: new IconButton(
           icon: Icon(
-            Icons.block,
+            Icons.content_copy,
             color: Colors.grey[500],
             size: 45.0,
           ),
           onPressed: () async {
-
+            final data = ClipboardData(text: alarm.name);
+            await Clipboard.setData(data);
           }),
     );
   }
