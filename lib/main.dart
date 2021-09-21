@@ -34,13 +34,7 @@ class _ChangeFormState extends StatelessWidget {
         appBar: AppBar(title: Text('Startup Name Generator'), actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: () async {
-              final storage = new Storage();
-              final nextId = await storage.getNextAlarmId();
-              final newAlarm = Alarm().copyWith(id: nextId, time: TimeOfDay.now().format(context), name: "コーリングマン", on: false);
-              final successful = await storage.addAlarm(newAlarm);
-              if (successful) context.read<AlarmListStateNotifier>().addAlarmList(newAlarm);
-            },
+            onPressed: () => _addPopUp(context)
           )
         ]),
         body: _buildList(context));
@@ -63,13 +57,8 @@ class _ChangeFormState extends StatelessWidget {
   }
 
   Widget _buildTile(Alarm alarm, int i, BuildContext context) {
-    return SwitchListTile(
-        value: alarm.on,
-        activeColor: Colors.orange,
-        activeTrackColor: Colors.red,
-        inactiveThumbColor: Colors.blue,
-        inactiveTrackColor: Colors.grey,
-        secondary: new IconButton(
+    return ListTile(
+        leading: new IconButton(
             icon: Icon(
               Icons.block,
               color: Colors.grey[500],
@@ -82,13 +71,95 @@ class _ChangeFormState extends StatelessWidget {
             }),
         title: Text("${alarm.time}"),
         subtitle: Text(alarm.name),
-        onChanged: (bool value) async {
-          final storage = Storage();
-          final successful = await storage.updateAlarm(Alarm().copyWith(
-              id: alarm.id, name: alarm.name, time: alarm.time, on: value));
-          if (successful)
-            context.read<AlarmListStateNotifier>().updateAlarmActivate(i);
-          alarm.on ? print("off") : print("on");
-        });
+      trailing: new IconButton(
+          icon: Icon(
+            Icons.block,
+            color: Colors.grey[500],
+            size: 45.0,
+          ),
+          onPressed: () async {
+
+          }),
+    );
   }
+}
+        // onChanged: (bool value) async {
+        //   final storage = Storage();
+        //   final successful = await storage.updateAlarm(Alarm().copyWith(
+        //       id: alarm.id, name: alarm.name, time: alarm.time, on: value));
+        //   if (successful)
+        //     context.read<AlarmListStateNotifier>().updateAlarmActivate(i);
+        //   alarm.on ? print("off") : print("on");
+        // }
+
+void _addPopUp(BuildContext context) {
+  String site="", id ="", mail="", password="";
+
+  showDialog(
+      context: context,
+      builder: (context) {
+        return SimpleDialog(
+          title: Text("追加"),
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: 14,
+            vertical: 24,
+          ),
+          children: [
+            TextField(
+              decoration: InputDecoration(
+                labelText: "サイト名",
+              ),
+              onChanged: (string) {
+                site = string;
+              },
+            ),
+            TextField(
+              decoration: InputDecoration(
+                labelText: "ID",
+              ),
+              onChanged: (string) {
+                id = string;
+              },
+            ),
+            TextField(
+              decoration: InputDecoration(
+                labelText: "メールアドレス",
+              ),
+              onChanged: (string) {
+                mail = string;
+              },
+            ),
+            TextField(
+              decoration: InputDecoration(
+                labelText: "パスワード",
+              ),
+              onChanged: (string) {
+                password = string;
+              },
+            ),
+            InkWell(
+              child: Container(
+                  margin: EdgeInsets.fromLTRB(40, 20, 40, 0),
+                  padding: EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    border: Border.all(color: Colors.blueAccent),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Icon(
+                    Icons.phone_forwarded,
+                    color: Colors.white,
+                  )),
+              onTap: () async {
+                final storage = new Storage();
+                final nextId = await storage.getNextAlarmId();
+                final newAlarm = Alarm().copyWith(id: nextId, time: site, name: password, on: false);
+                final successful = await storage.addAlarm(newAlarm);
+                if (successful) context.read<AlarmListStateNotifier>().addAlarmList(newAlarm);
+                Navigator.pop(context);
+                },
+            ),
+          ],
+        );
+      });
 }
