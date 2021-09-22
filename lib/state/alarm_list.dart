@@ -16,9 +16,11 @@ class Alarm with _$Alarm {
   const factory Alarm(
       {
         @JsonKey(name: "id") @Default(0) int id,
-        @JsonKey(name: "time") @Default("") String time,
-      @JsonKey(name: "name") @Default("") String name,
-      @JsonKey(name: "on") @Default(false) bool on}) = _Alarm;
+        @JsonKey(name: "site") @Default("") String site,
+        @JsonKey(name: "userId") @Default("") String userId,
+        @JsonKey(name: "mail") @Default("") String mail,
+        @JsonKey(name: "password") @Default("") String password,
+      }) = _Alarm;
 
   factory Alarm.fromJson(Map<String, dynamic> json) => _$AlarmFromJson(json);
 }
@@ -39,13 +41,6 @@ class AlarmListStateNotifier extends StateNotifier<AlarmList> {
   void removeAlarmListItem(int index) {
     final newAlarmList = List<Alarm>.from(state.alarmList);
     newAlarmList.removeAt(index);
-    state = state.copyWith(alarmList: newAlarmList);
-  }
-
-  void updateAlarmActivate(int index) {
-    final newAlarmList = List<Alarm>.from(state.alarmList);
-    final alarm = newAlarmList[index].copyWith(on: !newAlarmList[index].on);
-    newAlarmList.replaceRange(index, index + 1, [alarm]);
     state = state.copyWith(alarmList: newAlarmList);
   }
 }

@@ -70,8 +70,7 @@ class _ChangeFormState extends StatelessWidget {
               storage.deleteAlarm(alarm.id);
               context.read<AlarmListStateNotifier>().removeAlarmListItem(i);
             }),
-        title: Text("${alarm.time}"),
-        subtitle: Text(alarm.name),
+        title: Text("${alarm.site}"),
       trailing: new IconButton(
           icon: Icon(
             Icons.content_copy,
@@ -79,7 +78,7 @@ class _ChangeFormState extends StatelessWidget {
             size: 45.0,
           ),
           onPressed: () async {
-            final data = ClipboardData(text: alarm.name);
+            final data = ClipboardData(text: alarm.password);
             await Clipboard.setData(data);
           }),
     );
@@ -155,7 +154,7 @@ void _addPopUp(BuildContext context) {
               onTap: () async {
                 final storage = new Storage();
                 final nextId = await storage.getNextAlarmId();
-                final newAlarm = Alarm().copyWith(id: nextId, time: site, name: password, on: false);
+                final newAlarm = Alarm().copyWith(id: nextId, site: site, userId: id, mail: mail, password: password);
                 final successful = await storage.addAlarm(newAlarm);
                 if (successful) context.read<AlarmListStateNotifier>().addAlarmList(newAlarm);
                 Navigator.pop(context);

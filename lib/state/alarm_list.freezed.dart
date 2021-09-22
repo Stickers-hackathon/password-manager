@@ -156,14 +156,16 @@ class _$AlarmTearOff {
 
   _Alarm call(
       {@JsonKey(name: "id") int id = 0,
-      @JsonKey(name: "time") String time = "",
-      @JsonKey(name: "name") String name = "",
-      @JsonKey(name: "on") bool on = false}) {
+      @JsonKey(name: "site") String site = "",
+      @JsonKey(name: "userId") String userId = "",
+      @JsonKey(name: "mail") String mail = "",
+      @JsonKey(name: "password") String password = ""}) {
     return _Alarm(
       id: id,
-      time: time,
-      name: name,
-      on: on,
+      site: site,
+      userId: userId,
+      mail: mail,
+      password: password,
     );
   }
 
@@ -179,12 +181,14 @@ const $Alarm = _$AlarmTearOff();
 mixin _$Alarm {
   @JsonKey(name: "id")
   int get id => throw _privateConstructorUsedError;
-  @JsonKey(name: "time")
-  String get time => throw _privateConstructorUsedError;
-  @JsonKey(name: "name")
-  String get name => throw _privateConstructorUsedError;
-  @JsonKey(name: "on")
-  bool get on => throw _privateConstructorUsedError;
+  @JsonKey(name: "site")
+  String get site => throw _privateConstructorUsedError;
+  @JsonKey(name: "userId")
+  String get userId => throw _privateConstructorUsedError;
+  @JsonKey(name: "mail")
+  String get mail => throw _privateConstructorUsedError;
+  @JsonKey(name: "password")
+  String get password => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -197,9 +201,10 @@ abstract class $AlarmCopyWith<$Res> {
       _$AlarmCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: "id") int id,
-      @JsonKey(name: "time") String time,
-      @JsonKey(name: "name") String name,
-      @JsonKey(name: "on") bool on});
+      @JsonKey(name: "site") String site,
+      @JsonKey(name: "userId") String userId,
+      @JsonKey(name: "mail") String mail,
+      @JsonKey(name: "password") String password});
 }
 
 /// @nodoc
@@ -213,27 +218,32 @@ class _$AlarmCopyWithImpl<$Res> implements $AlarmCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
-    Object? time = freezed,
-    Object? name = freezed,
-    Object? on = freezed,
+    Object? site = freezed,
+    Object? userId = freezed,
+    Object? mail = freezed,
+    Object? password = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      time: time == freezed
-          ? _value.time
-          : time // ignore: cast_nullable_to_non_nullable
+      site: site == freezed
+          ? _value.site
+          : site // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      on: on == freezed
-          ? _value.on
-          : on // ignore: cast_nullable_to_non_nullable
-              as bool,
+      mail: mail == freezed
+          ? _value.mail
+          : mail // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: password == freezed
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -245,9 +255,10 @@ abstract class _$AlarmCopyWith<$Res> implements $AlarmCopyWith<$Res> {
   @override
   $Res call(
       {@JsonKey(name: "id") int id,
-      @JsonKey(name: "time") String time,
-      @JsonKey(name: "name") String name,
-      @JsonKey(name: "on") bool on});
+      @JsonKey(name: "site") String site,
+      @JsonKey(name: "userId") String userId,
+      @JsonKey(name: "mail") String mail,
+      @JsonKey(name: "password") String password});
 }
 
 /// @nodoc
@@ -262,27 +273,32 @@ class __$AlarmCopyWithImpl<$Res> extends _$AlarmCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? time = freezed,
-    Object? name = freezed,
-    Object? on = freezed,
+    Object? site = freezed,
+    Object? userId = freezed,
+    Object? mail = freezed,
+    Object? password = freezed,
   }) {
     return _then(_Alarm(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      time: time == freezed
-          ? _value.time
-          : time // ignore: cast_nullable_to_non_nullable
+      site: site == freezed
+          ? _value.site
+          : site // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      on: on == freezed
-          ? _value.on
-          : on // ignore: cast_nullable_to_non_nullable
-              as bool,
+      mail: mail == freezed
+          ? _value.mail
+          : mail // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: password == freezed
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -292,9 +308,10 @@ class __$AlarmCopyWithImpl<$Res> extends _$AlarmCopyWithImpl<$Res>
 class _$_Alarm with DiagnosticableTreeMixin implements _Alarm {
   const _$_Alarm(
       {@JsonKey(name: "id") this.id = 0,
-      @JsonKey(name: "time") this.time = "",
-      @JsonKey(name: "name") this.name = "",
-      @JsonKey(name: "on") this.on = false});
+      @JsonKey(name: "site") this.site = "",
+      @JsonKey(name: "userId") this.userId = "",
+      @JsonKey(name: "mail") this.mail = "",
+      @JsonKey(name: "password") this.password = ""});
 
   factory _$_Alarm.fromJson(Map<String, dynamic> json) =>
       _$_$_AlarmFromJson(json);
@@ -303,18 +320,21 @@ class _$_Alarm with DiagnosticableTreeMixin implements _Alarm {
   @JsonKey(name: "id")
   final int id;
   @override
-  @JsonKey(name: "time")
-  final String time;
+  @JsonKey(name: "site")
+  final String site;
   @override
-  @JsonKey(name: "name")
-  final String name;
+  @JsonKey(name: "userId")
+  final String userId;
   @override
-  @JsonKey(name: "on")
-  final bool on;
+  @JsonKey(name: "mail")
+  final String mail;
+  @override
+  @JsonKey(name: "password")
+  final String password;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Alarm(id: $id, time: $time, name: $name, on: $on)';
+    return 'Alarm(id: $id, site: $site, userId: $userId, mail: $mail, password: $password)';
   }
 
   @override
@@ -323,9 +343,10 @@ class _$_Alarm with DiagnosticableTreeMixin implements _Alarm {
     properties
       ..add(DiagnosticsProperty('type', 'Alarm'))
       ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('time', time))
-      ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('on', on));
+      ..add(DiagnosticsProperty('site', site))
+      ..add(DiagnosticsProperty('userId', userId))
+      ..add(DiagnosticsProperty('mail', mail))
+      ..add(DiagnosticsProperty('password', password));
   }
 
   @override
@@ -334,21 +355,25 @@ class _$_Alarm with DiagnosticableTreeMixin implements _Alarm {
         (other is _Alarm &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.time, time) ||
-                const DeepCollectionEquality().equals(other.time, time)) &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.on, on) ||
-                const DeepCollectionEquality().equals(other.on, on)));
+            (identical(other.site, site) ||
+                const DeepCollectionEquality().equals(other.site, site)) &&
+            (identical(other.userId, userId) ||
+                const DeepCollectionEquality().equals(other.userId, userId)) &&
+            (identical(other.mail, mail) ||
+                const DeepCollectionEquality().equals(other.mail, mail)) &&
+            (identical(other.password, password) ||
+                const DeepCollectionEquality()
+                    .equals(other.password, password)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(time) ^
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(on);
+      const DeepCollectionEquality().hash(site) ^
+      const DeepCollectionEquality().hash(userId) ^
+      const DeepCollectionEquality().hash(mail) ^
+      const DeepCollectionEquality().hash(password);
 
   @JsonKey(ignore: true)
   @override
@@ -364,9 +389,10 @@ class _$_Alarm with DiagnosticableTreeMixin implements _Alarm {
 abstract class _Alarm implements Alarm {
   const factory _Alarm(
       {@JsonKey(name: "id") int id,
-      @JsonKey(name: "time") String time,
-      @JsonKey(name: "name") String name,
-      @JsonKey(name: "on") bool on}) = _$_Alarm;
+      @JsonKey(name: "site") String site,
+      @JsonKey(name: "userId") String userId,
+      @JsonKey(name: "mail") String mail,
+      @JsonKey(name: "password") String password}) = _$_Alarm;
 
   factory _Alarm.fromJson(Map<String, dynamic> json) = _$_Alarm.fromJson;
 
@@ -374,14 +400,17 @@ abstract class _Alarm implements Alarm {
   @JsonKey(name: "id")
   int get id => throw _privateConstructorUsedError;
   @override
-  @JsonKey(name: "time")
-  String get time => throw _privateConstructorUsedError;
+  @JsonKey(name: "site")
+  String get site => throw _privateConstructorUsedError;
   @override
-  @JsonKey(name: "name")
-  String get name => throw _privateConstructorUsedError;
+  @JsonKey(name: "userId")
+  String get userId => throw _privateConstructorUsedError;
   @override
-  @JsonKey(name: "on")
-  bool get on => throw _privateConstructorUsedError;
+  @JsonKey(name: "mail")
+  String get mail => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: "password")
+  String get password => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$AlarmCopyWith<_Alarm> get copyWith => throw _privateConstructorUsedError;
