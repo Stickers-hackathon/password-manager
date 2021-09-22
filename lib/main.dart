@@ -3,7 +3,7 @@ import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:mezamashi_denwa/state/alarm_list.dart';
 import 'package:mezamashi_denwa/storage/alarm_list.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/services.dart';
+import 'detail.dart';
 
 void main() => runApp(MyApp());
 
@@ -71,27 +71,13 @@ class _ChangeFormState extends StatelessWidget {
               context.read<AlarmListStateNotifier>().removeAlarmListItem(i);
             }),
         title: Text("${alarm.site}"),
-      trailing: new IconButton(
-          icon: Icon(
-            Icons.content_copy,
-            color: Colors.grey[500],
-            size: 45.0,
-          ),
-          onPressed: () async {
-            final data = ClipboardData(text: alarm.password);
-            await Clipboard.setData(data);
-          }),
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Detail(alarm.site, alarm.userId, alarm.mail, alarm.password)),
+      )
     );
   }
 }
-        // onChanged: (bool value) async {
-        //   final storage = Storage();
-        //   final successful = await storage.updateAlarm(Alarm().copyWith(
-        //       id: alarm.id, name: alarm.name, time: alarm.time, on: value));
-        //   if (successful)
-        //     context.read<AlarmListStateNotifier>().updateAlarmActivate(i);
-        //   alarm.on ? print("off") : print("on");
-        // }
 
 void _addPopUp(BuildContext context) {
   String site="", id ="", mail="", password="";
