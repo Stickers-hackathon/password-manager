@@ -17,23 +17,28 @@ class Detail extends StatelessWidget {
         ),
         body: ListView(
           children: [
-            _tile(site),
-            _tile(userId),
-          _tile(mail),
-          _tile(password)],
+            _tile("サイト", true),
+            _tile(site, false),
+            _tile("ID", true),
+            _tile(userId, false),
+            _tile("メールアドレス", true),
+            _tile(mail, false),
+            _tile("パスワード", true),
+            _tile(password, false)],
         )
       )
     );
   }
 
-  Widget _tile (String text) {
+  Widget _tile (String text, bool gray) {
     return ListTile(
+      tileColor: gray ? Colors.grey : Colors.white,
       title: Text(text),
       trailing: new IconButton(
           icon: Icon(
             Icons.content_copy,
             color: Colors.grey[500],
-            size: 45.0,
+            size: 40.0,
           ),
           onPressed: () async {
             final data = ClipboardData(text: text);

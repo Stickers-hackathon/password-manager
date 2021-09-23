@@ -32,7 +32,7 @@ class _ChangeFormState extends StatelessWidget {
     }
 
     return Scaffold(
-        appBar: AppBar(title: Text('Startup Name Generator'), actions: <Widget>[
+        appBar: AppBar(title: Text('Password Manager'), actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () => _addPopUp(context)
@@ -58,12 +58,16 @@ class _ChangeFormState extends StatelessWidget {
   }
 
   Widget _buildTile(Alarm alarm, int i, BuildContext context) {
-    return ListTile(
+    return Container(
+        padding: EdgeInsets.fromLTRB(0, 5, 0, 10),
+        decoration: new BoxDecoration(
+        border: new Border(bottom: new BorderSide(color: Colors.grey),),),
+    child: ListTile(
         leading: new IconButton(
             icon: Icon(
               Icons.block,
               color: Colors.grey[500],
-              size: 45.0,
+              size: 40.0,
             ),
             onPressed: () async {
               final storage = Storage();
@@ -75,7 +79,7 @@ class _ChangeFormState extends StatelessWidget {
         context,
         MaterialPageRoute(builder: (context) => Detail(alarm.site, alarm.userId, alarm.mail, alarm.password)),
       )
-    );
+    ));
   }
 }
 
@@ -133,9 +137,9 @@ void _addPopUp(BuildContext context) {
                     border: Border.all(color: Colors.blueAccent),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Icon(
-                    Icons.phone_forwarded,
-                    color: Colors.white,
+                  child: Text("OK",
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(color: Colors.white),
                   )),
               onTap: () async {
                 final storage = new Storage();
