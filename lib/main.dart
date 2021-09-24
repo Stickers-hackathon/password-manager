@@ -3,7 +3,7 @@ import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:mezamashi_denwa/state/alarm_list.dart';
 import 'package:mezamashi_denwa/storage/alarm_list.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/services.dart';
+import 'detail.dart';
 
 void main() => runApp(MyApp());
 
@@ -32,7 +32,7 @@ class _ChangeFormState extends StatelessWidget {
     }
 
     return Scaffold(
-        appBar: AppBar(title: Text('Startup Name Generator'), actions: <Widget>[
+        appBar: AppBar(title: Text('Password Manager'), actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () => _addPopUp(context)
@@ -58,41 +58,30 @@ class _ChangeFormState extends StatelessWidget {
   }
 
   Widget _buildTile(Alarm alarm, int i, BuildContext context) {
-    return ListTile(
+    return Container(
+        padding: EdgeInsets.fromLTRB(0, 5, 0, 10),
+        decoration: new BoxDecoration(
+        border: new Border(bottom: new BorderSide(color: Colors.grey),),),
+    child: ListTile(
         leading: new IconButton(
             icon: Icon(
               Icons.block,
               color: Colors.grey[500],
-              size: 45.0,
+              size: 40.0,
             ),
             onPressed: () async {
               final storage = Storage();
               storage.deleteAlarm(alarm.id);
               context.read<AlarmListStateNotifier>().removeAlarmListItem(i);
             }),
-        title: Text("${alarm.time}"),
-        subtitle: Text(alarm.name),
-      trailing: new IconButton(
-          icon: Icon(
-            Icons.content_copy,
-            color: Colors.grey[500],
-            size: 45.0,
-          ),
-          onPressed: () async {
-            final data = ClipboardData(text: alarm.name);
-            await Clipboard.setData(data);
-          }),
-    );
+        title: Text("${alarm.site}"),
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Detail(alarm.site, alarm.userId, alarm.mail, alarm.password)),
+      )
+    ));
   }
 }
-        // onChanged: (bool value) async {
-        //   final storage = Storage();
-        //   final successful = await storage.updateAlarm(Alarm().copyWith(
-        //       id: alarm.id, name: alarm.name, time: alarm.time, on: value));
-        //   if (successful)
-        //     context.read<AlarmListStateNotifier>().updateAlarmActivate(i);
-        //   alarm.on ? print("off") : print("on");
-        // }
 
 void _addPopUp(BuildContext context) {
   String site="", id ="", mail="", password="";
@@ -148,14 +137,14 @@ void _addPopUp(BuildContext context) {
                     border: Border.all(color: Colors.blueAccent),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: Icon(
-                    Icons.phone_forwarded,
-                    color: Colors.white,
+                  child: Text("OK",
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(color: Colors.white),
                   )),
               onTap: () async {
                 final storage = new Storage();
                 final nextId = await storage.getNextAlarmId();
-                final newAlarm = Alarm().copyWith(id: nextId, time: site, name: password, on: false);
+                final newAlarm = Alarm().copyWith(id: nextId, site: site, userId: id, mail: mail, password: password);
                 final successful = await storage.addAlarm(newAlarm);
                 if (successful) context.read<AlarmListStateNotifier>().addAlarmList(newAlarm);
                 Navigator.pop(context);
